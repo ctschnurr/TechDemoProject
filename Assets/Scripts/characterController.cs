@@ -7,11 +7,13 @@ public class characterController : MonoBehaviour
     float speed = 5.0f; // units per frame
 
     GameObject player;
+    public Vector3 origin;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
+        origin = player.transform.position;
     }
 
     // Update is called once per frame
