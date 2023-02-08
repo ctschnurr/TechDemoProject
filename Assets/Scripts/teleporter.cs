@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class teleporter : MonoBehaviour
 {
-    GameObject destination;
+    // GameObject destination;
     Vector3 destination_coords;
+
+    GameObject tp;
+
+    public Transform destination;
 
     // Start is called before the first frame update
     void Start()
     {
-        destination = GameObject.Find("Destination");
+        destination = this.gameObject.transform.GetChild(0);
         destination_coords = destination.transform.position;
 
         Debug.Log(destination_coords);
