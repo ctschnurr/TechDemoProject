@@ -2,21 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class teleporter : MonoBehaviour
+public class movingPlatform_trigger : MonoBehaviour
 {
-    // GameObject destination;
-    Vector3 destination_coords;
-
-    GameObject tp;
-
-    [HideInInspector]
-    public Transform destination;
+    public GameObject platform;
 
     // Start is called before the first frame update
     void Start()
     {
-        destination = this.gameObject.transform.GetChild(0);
-        destination_coords = destination.transform.position;
+         platform = transform.parent.gameObject;
     }
 
     // Update is called once per frame
@@ -29,7 +22,17 @@ public class teleporter : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            other.transform.position = destination_coords;
+            other.transform.SetParent(platform.transform);
+
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            other.transform.parent = null;
+
         }
     }
 }

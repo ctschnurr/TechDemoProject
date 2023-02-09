@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class killBox : MonoBehaviour
+public class checkPoint : MonoBehaviour
 {
     public characterController player;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -22,8 +21,7 @@ public class killBox : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            other.transform.position = player.respawn;
-            other.transform.rotation = Quaternion.identity;
+            player.respawn = player.transform.position;
         }
     }
 }

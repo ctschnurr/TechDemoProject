@@ -7,13 +7,15 @@ public class characterController : MonoBehaviour
     float speed = 5.0f; // units per frame
 
     GameObject player;
-    public Vector3 origin;
+    public Vector3 respawn;
+
+    Color lerpedColor = Color.white;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
-        origin = player.transform.position;
+        respawn = player.transform.position;
     }
 
     // Update is called once per frame
@@ -27,12 +29,27 @@ public class characterController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
         {
-            player.transform.Translate(0, 0, vert);
+            transform.Translate(0, 0, vert);
         }
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
-            player.transform.Translate(horiz, 0, 0);
+            transform.Translate(horiz, 0, 0);
         }
+
+        if (Input.GetKey(KeyCode.E))
+        {
+            transform.Rotate(0.0f, 0.5f, 0.0f);
+        }
+
+        if (Input.GetKey(KeyCode.Q))
+        {
+            transform.Rotate(0.0f, -0.5f, 0.0f);
+        }
+
+        lerpedColor = Color.Lerp(Color.green, Color.white, Mathf.PingPong(Time.time, 1));
+        GetComponent<Renderer>().material.color = lerpedColor;
+
+
     }
 }

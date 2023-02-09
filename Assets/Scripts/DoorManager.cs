@@ -10,6 +10,7 @@ public class DoorManager : MonoBehaviour
     private Vector3 goUp = new Vector3(0, 0, 0);
     private Vector3 startPos = new Vector3(0, 0, 0);
 
+    [HideInInspector]
     public bool up = false;
 
     // Start is called before the first frame update
