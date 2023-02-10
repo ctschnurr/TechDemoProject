@@ -4,36 +4,38 @@ using UnityEngine;
 
 public class DoorTrigger : MonoBehaviour
 {
-    public DoorManager door;
+    DoorManager door;
+    Transform parent;
+    characterController player;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        parent = transform.parent;
+        door = parent.Find("Door").GetComponent<DoorManager>();
 
-
+        player = GameObject.Find("Player").GetComponent<characterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
+        if (player.pressedSpace == true && door.inRange == true)
         {
             door.up = true;
-
+            player.pressedSpace = false;
         }
     }
 
-    void OnTriggerExit(Collider other)
+    void OnTriggerEnter()
     {
-        if (other.gameObject.tag == "Player")
-        {
-            door.up = false;
+        door.inRange = true;
+    }
 
-        }
+    void OnTriggerExit()
+    {
+        door.inRange = false;
+        door.up = false;
     }
 }

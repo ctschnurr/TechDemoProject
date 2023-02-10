@@ -24,6 +24,7 @@ public class killBox : MonoBehaviour
         {
             other.transform.position = player.respawn;
             other.transform.rotation = Quaternion.identity;
+            player.messageObject.SetActive(false);
         }
     }
 }

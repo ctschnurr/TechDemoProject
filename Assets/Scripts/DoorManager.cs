@@ -12,6 +12,7 @@ public class DoorManager : MonoBehaviour
 
     [HideInInspector]
     public bool up = false;
+    public bool inRange = false;
 
     // Start is called before the first frame update
     void Start()

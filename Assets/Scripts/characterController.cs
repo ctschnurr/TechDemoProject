@@ -1,13 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class characterController : MonoBehaviour
 {
     float speed = 5.0f; // units per frame
 
     GameObject player;
+
+    public TextMeshProUGUI messageText;
+    public GameObject messageObject;
+    public string message;
+
+    [HideInInspector]
     public Vector3 respawn;
+    public bool pressedSpace = false;
 
     Color lerpedColor = Color.white;
 
@@ -16,11 +24,30 @@ public class characterController : MonoBehaviour
     {
         player = GameObject.Find("Player");
         respawn = player.transform.position;
+
+        message = "WASD to Move, Q&E to Rotate, Space to Interact";
+        ShowText();
+    }
+
+    public void ShowText()
+    {
+        messageText.text = message;
+        messageObject.SetActive(true);
+        Invoke("HideText", 3);
+
+    }
+
+    public void HideText()
+    {
+        messageObject.SetActive(false);
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (pressedSpace == true) pressedSpace = false;
+
         float vert = Input.GetAxis("Vertical") * speed;
         float horiz = Input.GetAxis("Horizontal") * speed;
 
@@ -47,9 +74,25 @@ public class characterController : MonoBehaviour
             transform.Rotate(0.0f, -0.5f, 0.0f);
         }
 
-        lerpedColor = Color.Lerp(Color.green, Color.white, Mathf.PingPong(Time.time, 1));
+        if (Input.GetKey(KeyCode.Space))
+        {
+            pressedSpace = true;
+        }
+
+        lerpedColor = Color.Lerp(Color.blue, Color.green, Mathf.PingPong(Time.time, 1));
         GetComponent<Renderer>().material.color = lerpedColor;
 
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("PickUp"))
+        {
+            other.gameObject.SetActive(false);
+            // count = count + 1;
+            // 
+            // SetCountText();
+        }
     }
 }

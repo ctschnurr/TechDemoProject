@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class checkPoint : MonoBehaviour
 {
-    public characterController player;
+    characterController player;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        player = GameObject.Find("Player").GetComponent<characterController>();
     }
 
     // Update is called once per frame
@@ -22,6 +23,7 @@ public class checkPoint : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             player.respawn = player.transform.position;
+
         }
     }
 }
