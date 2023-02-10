@@ -9,13 +9,14 @@ public class characterController : MonoBehaviour
 
     GameObject player;
 
-    public TextMeshProUGUI messageText;
     public GameObject messageObject;
-    public string message;
-
-    [HideInInspector]
+    public TextMeshProUGUI messageText;
+    public GameObject counterObject;
+    public TextMeshProUGUI counterText;
     public Vector3 respawn;
     public bool pressedSpace = false;
+    public string message;
+    public int points = 0;
 
     Color lerpedColor = Color.white;
 
@@ -25,8 +26,18 @@ public class characterController : MonoBehaviour
         player = GameObject.Find("Player");
         respawn = player.transform.position;
 
+        messageObject = GameObject.Find("Canvas/playerMessage");
+        messageText = messageObject.GetComponent<TextMeshProUGUI>();
+
+        counterObject = GameObject.Find("Canvas/counter");
+        counterText = counterObject.GetComponent<TextMeshProUGUI>();
+        counterText.text = "Points: " + points;
+        counterObject.transform.position = new Vector3(110, 20, 0);
+        counterText.color = new Color32(0, 0, 0, 255);
+
         message = "WASD to Move, Q&E to Rotate, Space to Interact";
         ShowText();
+        ShowPoints();
     }
 
     public void ShowText()
@@ -36,6 +47,12 @@ public class characterController : MonoBehaviour
         Invoke("HideText", 3);
 
     }
+
+    public void ShowPoints()
+    {
+        counterText.text = "Points: " + points;
+    }
+
 
     public void HideText()
     {
@@ -90,9 +107,9 @@ public class characterController : MonoBehaviour
         if (other.gameObject.CompareTag("PickUp"))
         {
             other.gameObject.SetActive(false);
-            // count = count + 1;
-            // 
-            // SetCountText();
+            points++;
+            
+            ShowPoints();
         }
     }
 }
