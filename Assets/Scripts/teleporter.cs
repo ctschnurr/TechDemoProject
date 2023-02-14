@@ -5,9 +5,8 @@ using UnityEngine;
 public class teleporter : MonoBehaviour
 {
     // GameObject destination;
-    Vector3 destination_coords;
-
     GameObject tp;
+    Vector3 destination_coords;
 
     [HideInInspector]
     public Transform destination;
@@ -16,7 +15,7 @@ public class teleporter : MonoBehaviour
     void Start()
     {
         destination = this.gameObject.transform.GetChild(0);
-        destination_coords = destination.transform.position;
+        destination_coords = new Vector3(destination.transform.position.x + 1f, destination.transform.position.y + 0.6f, destination.transform.position.z - 1f);
     }
 
     // Update is called once per frame

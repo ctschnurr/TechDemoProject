@@ -27,8 +27,8 @@ public class DoorTriggerV2 : MonoBehaviour
         doorL = parent.transform.Find("DoorL").gameObject;
         doorR = parent.transform.Find("DoorR").gameObject;
 
-        startLeft = doorL.transform.position;
-        startRight = doorR.transform.position;
+        startLeft = doorL.transform.localPosition;
+        startRight = doorR.transform.localPosition;
 
         goLeft = startLeft;
         goRight = startRight;
@@ -50,16 +50,16 @@ public class DoorTriggerV2 : MonoBehaviour
 
         if (goTime == true)
         {
-            doorL.transform.position = Vector3.MoveTowards(doorL.transform.position, goLeft, Time.deltaTime * speed);
-            doorR.transform.position = Vector3.MoveTowards(doorR.transform.position, goRight, Time.deltaTime * speed);
+            doorL.transform.localPosition = Vector3.MoveTowards(doorL.transform.localPosition, goLeft, Time.deltaTime * speed);
+            doorR.transform.localPosition = Vector3.MoveTowards(doorR.transform.localPosition, goRight, Time.deltaTime * speed);
 
             player.pressedSpace = false;
         }
 
         if (goTime == false)
         {
-            doorL.transform.position = Vector3.MoveTowards(doorL.transform.position, startLeft, Time.deltaTime * speed);
-            doorR.transform.position = Vector3.MoveTowards(doorR.transform.position, startRight, Time.deltaTime * speed);
+            doorL.transform.localPosition = Vector3.MoveTowards(doorL.transform.localPosition, startLeft, Time.deltaTime * speed);
+            doorR.transform.localPosition = Vector3.MoveTowards(doorR.transform.localPosition, startRight, Time.deltaTime * speed);
         }
     }
 
